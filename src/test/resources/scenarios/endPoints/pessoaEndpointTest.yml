@@ -1,0 +1,120 @@
+shouldReturnCreatedPost:
+  requestBody: >-
+    {
+      "apelido" : "josé",
+      "nome" : "José Roberto",
+      "nascimento" : "2000-10-01",
+      "stack" : ["C#", "Node", "Oracle"]
+    }
+
+shouldReturn422IfApelidoExists:
+  requestBody: >-
+    {
+      "apelido" : "CACHORRO",
+      "nome" : "José Roberto",
+      "nascimento" : "2000-10-01",
+      "stack" : ["C#", "Node", "Oracle"]
+    }
+
+shouldReturn422IfApelidoIsNull:
+  requestBody: >-
+    {
+      "apelido" : null,
+      "nome" : "José Roberto",
+      "nascimento" : "2000-10-01",
+      "stack" : ["C#", "Node", "Oracle"]
+    }
+
+shouldReturn422IfNomeIsNull:
+  requestBody: >-
+    {
+      "apelido" : "CAO",
+      "nome" : null,
+      "nascimento" : "2000-10-01",
+      "stack" : ["C#", "Node", "Oracle"]
+    }
+
+shouldReturn422IfNomeInvalid:
+  requestBody: >-
+    {
+      "apelido" : "CAO",
+      "nome" : 1,
+      "nascimento" : "2000-10-01",
+      "stack" : ["C#", "Node", "Oracle"]
+    }
+
+shouldReturn422IfStackInvalid:
+  requestBody: >-
+    {
+      "apelido" : "Apelido",
+      "nome" : "teste",
+      "nascimento" : "2000-10-01",
+      "stack" : [1, "Node", "Oracle"]
+    }
+
+shouldReturnCreatedIfStackIsNull:
+  requestBody: >-
+    {
+      "apelido" : "CAO",
+      "nome" : "teste",
+      "nascimento" : "2000-10-01",
+      "stack" : null
+    }
+
+shouldReturn422IfStackElementMoreThan32Characters:
+  requestBody: >-
+    {
+      "apelido" : "CAO",
+      "nome" : "teste",
+      "nascimento" : "2000-10-01",
+      "stack" : ["qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq","testé"]
+    }
+
+shouldReturn422IfApelidoMoreThan32Characters:
+  requestBody: >-
+    {
+      "apelido" : "CAO0000000CAO0000000CAO0000000000",
+      "nome" : "teste",
+      "nascimento" : "2000-10-01",
+      "stack" : ["c++","testé"]
+    } 
+
+shouldReturn422IfApelidoDifferentString:
+  requestBody: >-
+    {
+      "apelido" : "12",
+      "nome" : "teste",
+      "nascimento" : "2000-10-01",
+      "stack" : ["c++","testé"]
+    }  
+
+shouldReturn422IfNomeMoreThan100Characters:
+  requestBody: >-
+    {
+      "apelido" : "cao",
+      "nome" : "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqaaaaa",
+      "nascimento" : "2000-10-01",
+      "stack" : ["c++","testé"]
+    }  
+
+shouldReturn422IfDateInvalidFormat:
+  requestBody: >-
+    {
+      "apelido" : "cao",
+      "nome" : "teste",
+      "nascimento" : "10-01-2001",
+      "stack" : ["c++","testé"]
+    }  
+    
+
+shouldReturnNoContentUpdateProcessWithMatchETag:
+  requestBody: >-
+    {
+       "active": false
+    }
+
+shouldReturnNotModifiedUpdateProcessWithMatchETag:
+  requestBody: >-
+    {
+       "active": true
+    }    
